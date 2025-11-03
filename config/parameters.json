@@ -1,0 +1,59 @@
+{
+  "physical_properties": {
+    "pendulum_rod_length": 0.3,
+    "pendulum_rod_mass": 0.025,
+    "arm_length": 0.2,
+    "arm_mass": 0.1,
+    "gravity": 9.80665,
+    "friction_pendulum": {
+      "viscous": 0.01,
+      "coulomb": 0.005
+    },
+    "friction_arm": {
+      "viscous": 0.01,
+      "coulomb": 0.005
+    }
+  },
+  "simulation": {
+    "solver_type": "ode45",
+    "step_size": 0.001,
+    "duration": 30.0,
+    "initial_conditions": {
+      "theta_arm": 0.0,
+      "theta_pendulum": 3.14159,
+      "theta_arm_dot": 0.0,
+      "theta_pendulum_dot": 0.0
+    }
+  },
+  "controllers": {
+    "lqr": {
+      "Q": [
+        [100, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 100, 0],
+        [0, 0, 0, 1]
+      ],
+      "R": [1]
+    },
+    "swing_up": {
+      "k_energy": 1.5,
+      "k_position": 0.1,
+      "k_velocity": 0.05,
+      "energy_target": 1.0,
+      "switch_angle_threshold": 0.2
+    }
+  },
+  "hardware": {
+    "encoder_resolution": 360,
+    "motor_pwm_freq": 20000,
+    "arduino_port": "COM3"
+  },
+  "gui": {
+    "update_rate": 30,
+    "plot_ranges": {
+      "theta_arm": [-3.14159, 3.14159],
+      "theta_pendulum": [-3.14159, 3.14159],
+      "torque": [-5, 5]
+    }
+  }
+}
