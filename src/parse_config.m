@@ -7,7 +7,7 @@ function config = parse_config(json_file_path)
 
     % Default path if none provided
     if nargin < 1
-        json_file_path = '../config/parameters.json';
+        json_file_path = 'config/parameters.json';  % Adjusted path
     end
     
     % Check if file exists
@@ -26,14 +26,18 @@ end
 function config = convert_parameter_arrays(config)
 % CONVERT_PARAMETER_ARRAYS Converts parameter arrays to appropriate MATLAB formats
     
-    % Convert LQR Q matrix to double matrix
+    % Check if LQR Q matrix needs conversion (JSON loads arrays directly as numeric)
     if isfield(config.controllers.lqr, 'Q')
-        config.controllers.lqr.Q = cell2mat(config.controllers.lqr.Q);
+        if iscell(config.controllers.lqr.Q)
+            config.controllers.lqr.Q = cell2mat(config.controllers.lqr.Q);
+        end
     end
     
-    % Convert LQR R matrix to double matrix
+    % Check if LQR R matrix needs conversion
     if isfield(config.controllers.lqr, 'R')
-        config.controllers.lqr.R = cell2mat(config.controllers.lqr.R);
+        if iscell(config.controllers.lqr.R)
+            config.controllers.lqr.R = cell2mat(config.controllers.lqr.R);
+        end
     end
     
     % Convert initial conditions to array

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Info File="src/simulation/l298n_lut_script.m" GroupUUID="" Icon="" Name="l298n_lut_script" Type="StartUp" Visible="0">
+    <Extension Name="StartUpPrev" Value="238d666a-1525-4ff3-85c5-5be1fb3a21c0"/>
+</Info>
